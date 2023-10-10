@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quick Poll Application</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f0f0f0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
+    
+            .poll {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                padding: 20px;
+                text-align: center;
+                width: 400px;
+            }
+    
+            h1 {
+                color: #ff001192;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+    
+            label {
+                font-weight: bold;
+            }
+    
+            button {
+                background-color: #ff001e;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 10px;
+                transition: background-color 0.3s ease-in-out;
+            }
+    
+            button:hover {
+                background-color: #b30000;
+            }
+    
+            p {
+                font-weight: bold;
+                margin-top: 20px;
+                font-size: 18px;
+            }
+    
+            span {
+                font-weight: bold;
+                color: #ff0022;
+                font-size: 24px;
+            }
+    
+            .option-button {
+                display: block;
+                margin: 15px auto;
+                width: 200px;
+                padding: 10px;
+                font-size: 18px;
+                border-radius: 5px;
+                border: 2px solid #ff0000;
+                background-color: transparent;
+                color: #ff0000;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+            }
+    
+            .option-button:hover {
+                background-color: #ff0000;
+                color: #fff;
+            }
+    
+            .create-poll {
+                display: none;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                padding: 20px;
+                text-align: center;
+                width: 400px;
+                margin: 20px auto;
+            }
+    
+            .create-poll h1 {
+                color: #ff0000;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+    
+            .create-poll label {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+            }
+    
+            .create-poll input[type="text"] {
+                width: 90%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+    
+            .create-poll button {
+                background-color: #ff0000;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 10px;
+                transition: background-color 0.3s ease-in-out;
+            }
+    
+            .create-poll button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+</head>
+<body>
+    <div class="poll" id="poll">
+        <h1>Created and Web application for Quick poll</h1>
+        <p id="question">Which option do you prefer?</p>
+        <button id="option1" class="option-button" onclick="vote('option1')">Option A</button>
+        <span id="countOption1">0</span><br>
+        <button id="option2" class="option-button" onclick="vote('option2')">Option B</button>
+        <span id="countOption2">0</span><br>
+        <button id="createPollButton" onclick="showCreatePoll()">Create a Poll</button>
+    </div>
+
+    <div class="create-poll" id="createPoll">
+        <h1>Create a New Poll</h1>
+        <label for="newQuestion">Question:</label>
+        <input type="text" id="newQuestion"><br>
+        <label for="newOption1">Option 1:</label>
+        <input type="text" id="newOption1"><br>
+        <label for="newOption2">Option 2:</label>
+        <input type="text" id="newOption2"><br>
+        <button id="createButton" onclick="createPoll()">Create Poll</button>
+    </div>
+
+    <script>
+        let countOption1 = 0;
+        let countOption2 = 0;
+
+        function vote(option) {
+            if (option === 'option1') {
+                countOption1++;
+                document.getElementById('countOption1').innerText = countOption1;
+            } else if (option === 'option2') {
+                countOption2++;
+                document.getElementById('countOption2').innerText = countOption2;
+            }
+        }
+
+        function showCreatePoll() {
+            document.getElementById('poll').style.display = 'none';
+            document.getElementById('createPoll').style.display = 'block';
+        }
+
+        function createPoll() {
+            const newQuestion = document.getElementById('newQuestion').value;
+            const newOption1 = document.getElementById('newOption1').value;
+            const newOption2 = document.getElementById('newOption2').value;
+
+            if (newQuestion && newOption1 && newOption2) {
+                document.getElementById('question').innerText = newQuestion;
+                document.getElementById('option1').innerText = newOption1;
+                document.getElementById('option2').innerText = newOption2;
+
+                document.getElementById('newQuestion').value = '';
+                document.getElementById('newOption1').value = '';
+                document.getElementById('newOption2').value = '';
+
+                document.getElementById('poll').style.display = 'block';
+                document.getElementById('createPoll').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
